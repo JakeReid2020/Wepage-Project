@@ -1,4 +1,25 @@
- /*-------footer-------*/
+ 
+/*-------body-------*/
+.img-responsive:hover
+{
+    opacity: 0.3;
+    transform: translateY(-10px);
+}
+
+.panel-primary
+{
+    background: rgb(240, 240, 240);
+    padding: 10px 20px 10px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: rgb(29, 29, 29);
+    
+}
+
+.button
+{
+    align-items: center;
+}
+/*-------footer-------*/
  .footer
  {
    background: #000;
