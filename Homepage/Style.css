@@ -1,4 +1,40 @@
- /*-------footer-------*/
+/*-------Featured products-------*/
+.title
+{
+  text-align: center;
+  margin: 5 auto 80px;
+  position: relative;
+  line-height: 100px;
+  color: #555;
+}
+
+.title::after
+{
+  content:'';
+  background: #ff523b;
+  width: 80px;
+  height: 5px;
+  border-radius: 5px;
+  position: absolute;
+  bottom:-10;
+  left:50%;
+  transform: translateX(-50%);
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 80%;
+  height: auto;
+  transition: .2s ease;
+  backface-visibility: hidden;
+}
+
+.image:hover{
+  transform: translateY(10px);
+}
+
+/*-------footer-------*/
  .footer
  {
    background: #000;
