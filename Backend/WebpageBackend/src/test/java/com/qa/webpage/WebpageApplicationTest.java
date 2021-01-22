@@ -4,10 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = WebpageBackendApplication.class)
-class WebpageBackendApplicationTests {
+public class WebpageApplicationTest {
 
 	@Test
 	void contextLoads() {
+		
 	}
-
+	
 }

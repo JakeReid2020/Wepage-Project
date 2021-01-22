@@ -1,37 +1,32 @@
-package com.qa.webpage.persistance;
+package com.qa.webpage.persistance.dto;
 
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
+import com.qa.webpage.persistance.Customer;
+import com.qa.webpage.persistance.LineItem;
+import com.qa.webpage.persistance.OrderTable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderTable {
+public class OrderDTO {
 
-	//Adding order Attributes:
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
-	
-	 @OneToMany
-	 List<LineItem> lineItems;
-	 
-	 @ManyToOne
-	 Customer customer;
+		private Long Id;
+		
+		 @OneToMany
+		 List<LineItem> lineItems;
+		 
+		 @ManyToOne
+		 Customer customer;
 }
-

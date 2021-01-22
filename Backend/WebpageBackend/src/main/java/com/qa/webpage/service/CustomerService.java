@@ -7,9 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.qa.webpage.persistance.Customer;
 import com.qa.webpage.persistance.dto.CustomerDTO;
 import com.qa.webpage.persistance.repo.CustomerRepo;
+import com.qa.webpage.utils.MyBeanUtils;
 
 @Service
 public class CustomerService {
@@ -31,12 +33,12 @@ public class CustomerService {
 	}
 	// CRUD
 
-	// (Create)
+	// (CREATE)
 	public CustomerDTO create(Customer customer) {
 		return this.mapToDTO(this.repo.save(customer));
 	}
 
-	// (ReadAll)
+	// (READ)
 	public List<CustomerDTO> readAll() {
 
 		List<Customer> catList = this.repo.findAll();
@@ -44,4 +46,27 @@ public class CustomerService {
 
 		return catListDTO;
 	}
+	
+	// (READ BY ID)
+	public CustomerDTO readone(Long id) {
+		return this.mapToDTO(this.repo.findById(id).orElseThrow());
+	}
+	
+	// (UPDATE BY ID)
+	
+	public CustomerDTO update(long id, Customer customer) {
+
+		Customer updatedCustomer = this.repo.findById(id).orElseThrow();
+		MyBeanUtils.mergeNotNull(customer, updatedCustomer);
+
+		return this.mapToDTO(this.repo.save(updatedCustomer));
+	}
+	
+	// (DELETE BY ID)
+	public boolean delete(Long id) {
+		this.repo.deleteById(id);
+
+		return !this.repo.existsById(id);
+	}
+	
 }

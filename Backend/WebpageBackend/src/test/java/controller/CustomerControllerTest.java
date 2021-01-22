@@ -1,4 +1,4 @@
-package com.qa.webpage.controller;
+package controller;
 
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -21,19 +21,18 @@ import com.qa.webpage.WebpageBackendApplication;
 import com.qa.webpage.persistance.Customer;
 import com.qa.webpage.persistance.dto.CustomerDTO;
 
-@SpringBootTest(classes = WebpageBackendApplication.class)
-public class CustomerController {
+@SpringBootTest (classes = WebpageBackendApplication.class)
 @AutoConfigureMockMvc
-@Sql(scripts = {"classpath:data-test.sql"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-@ActiveProfiles(profiles = "reg")
-public class CustomerControllerIntergrationTest{
+@Sql(scripts = {"classpath:data-test.sql"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+@ActiveProfiles(profiles = "dev")
+public class CustomerControllerTest {
+
+	//(WE NEED TO SET UP OUR ENVIORMENT/WHAT RESOURCES WE NEED)
 	
-	@Autowired
+	@Autowired // (INJECTION)
 	private MockMvc mock;
-	
 	@Autowired
 	private ModelMapper mapper;
-	
 	@Autowired
 	private ObjectMapper jsonifier;
 	
@@ -41,45 +40,63 @@ public class CustomerControllerIntergrationTest{
 		return this.mapper.map(customer, CustomerDTO.class);
 	}
 	
-	private final int TEST_ID = 1;
+	//(SETTING ID WHICH WILL BE USED FOR METHODS)
 	
+	private final int TEST_ID = 1;
+		
+	// ====================================
+	// (CRUD TEST)
+	// ====================================
+	
+	// (CREATE)
 	@Test
 	public void createCustomer() {
 		
-		Customer TEST_CUSTOMER = new Customer(0L,"Jake","101","Jake@hotmail.com")
-		
-		MockHttpServletRequestBuilder mockRequest = 
-		MockMvcRequestBuilders.request(HttpMethod.POST, "/customer/read"+TEST_ID)
-		.contentType(MediaType.APPLICATION_JSON)
-		//.content(this.jsonifier.writeValueAsString(value)) this will be needed for the body in the create method.
-		.accept(MediaType.APPLICATION_JSON);
-		
-		TEST_CUSTOMER.setId(4L);
-		
-		ResultMatcher matchContent = MockMvcResultMatchers.content().json(this.jsonifier.writeValueAsString(mapToDto(TEST_CUSTOMER)));
-		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
-		
 	}
-	
+	// (READALL)
 	@Test
 	public void readCustomer() {
+			
+	}
+	
+	// (READ BY ID)
+	@Test
+	public void readByIdcustomer() throws Exception {
 		
-		CustomerDTO TEST_CUSTOMER = new CustomerDTO(1L,"Jake","Jaffers","Jakereid@hotmail.co.uk");
+		// (WHAT WE EXPECT OUT OF THE RESULT)
+		
+		CustomerDTO TEST_CUSTOMER = new CustomerDTO(1L,"JAFFA", "DOGS29", "JAKE@GMAIL.COM"); 
+		
+		// (RUNNING TEST)
 		
 		MockHttpServletRequestBuilder mockRequest = 
-		MockMvcRequestBuilders.request(HttpMethod.GET, "/customer/read"+TEST_ID)
-		.contentType(MediaType.APPLICATION_JSON)
-		//.content(this.jsonifier.writeValueAsString(value)) this will be needed for the body in the create method.
-		.accept(MediaType.APPLICATION_JSON);
+		MockMvcRequestBuilders.request(HttpMethod.GET, "/customer/read/"+TEST_ID);
 		
+		// (EXPECTION OF RESULT)
 		
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(this.jsonifier.writeValueAsString(TEST_CUSTOMER));
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
 		
+		// (RUN & ASSERT)
 		this.mock.perform(mockRequest)
 		.andExpect(matchStatus)
 		.andExpect(matchContent);
 	}
-}
-
+	
+	// (UPDATE)
+	@Test
+	public void updateCustomer() {
+		
+	}
+	// (UPDATE BY ID)
+	@Test
+	public void updateByIdCustomer() {
+		
+	}
+	// (DELETE)
+	@Test
+	public void deleteCustomer() {
+		
+	}
+	
 }
