@@ -20,7 +20,7 @@ import com.qa.webpage.service.CustomerService;
 
 @RestController
 @RequestMapping("/customer")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 public class CustomerController {
 
 	private CustomerService service;
@@ -31,6 +31,9 @@ public class CustomerController {
 	}
 
 	// (CREATE)
+//	@CrossOrigin(origins = "http://localhost:8080")
+//	@CrossOrigin(origins = "*")	
+	@CrossOrigin	
 	@PostMapping("/register")
 	public ResponseEntity<CustomerDTO> create(@RequestBody Customer customer) {
 		return new ResponseEntity<CustomerDTO>(this.service.create(customer), HttpStatus.CREATED);
@@ -60,4 +63,15 @@ public class CustomerController {
 		return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	// (LOGIN)
+	@GetMapping("/login")
+	public ResponseEntity<Long> login(@RequestBody Customer customer) 
+	{
+		Long customer_id          = this.service.login(customer);
+		ResponseEntity<Long> resp = new ResponseEntity<Long>(customer_id, HttpStatus.ACCEPTED);	
+		
+		return resp;
+	}
+	
 }

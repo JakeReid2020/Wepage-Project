@@ -1,24 +1,34 @@
 package com.qa.webpage.persistance;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.criteria.Order;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@CrossOrigin
 public class Customer {
 
 	// Adding customer attributes:
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-
 	@NotNull
 	private String username;
 	@NotNull
@@ -26,53 +36,12 @@ public class Customer {
 	@NotNull
 	private String email;
 	
-	public Customer() {
-		super();
-	}
+	@OneToMany(mappedBy = "customer", fetch=FetchType.EAGER)
+	private List<OrderTable> ordertable;
 	
-	public Customer(Long id, @NotNull String username, @NotNull String password, @NotNull String email) {
-		super();
-		Id = id;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-	}
-
-	public Long getId() {
-		return Id;
-	}
-
-	public void setId(Long id) {
-		Id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	@Override
-	public String toString() {
-		return "Customer [Id=" + Id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
-	}
-
+	/*
+	@OneToMany(mappedBy = "customer")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<OrderTable> orderList;
+	*/
 }

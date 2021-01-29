@@ -11,13 +11,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
-@Data
+@Data 
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderTable {
@@ -26,12 +31,24 @@ public class OrderTable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
 	
-	 @OneToMany
-	 List<LineItem> lineItems;
+	private Long id;
+	
+	
+//	@OneToMany
+//	LineItem lineitem;
 	 
-	 @ManyToOne
-	 Customer customer;
+	@ManyToOne
+	private Customer customer;
+	
+	@OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<LineItem> lineitem;
+	
+	/*
+	@ManyToOne
+	private Customer customer;
+	*/
+	 
 }
 

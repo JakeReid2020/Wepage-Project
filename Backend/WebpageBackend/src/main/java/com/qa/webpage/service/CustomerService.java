@@ -1,5 +1,6 @@
 package com.qa.webpage.service;
 
+import java.beans.Statement;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,4 +70,14 @@ public class CustomerService {
 		return !this.repo.existsById(id);
 	}
 	
+	// (LOGIN)
+	public Long login(Customer customer) {
+		
+		/*
+		Statement statement = connection.createStatement();
+		statement.executeQuery("SELECT * FROM MILESTONE WHERE ID= 'D58BE'");
+		*/
+		
+		return 1L ;
+	}
 }

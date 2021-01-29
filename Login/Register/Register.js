@@ -4,17 +4,17 @@ const password = document.querySelector("#rpassword");
 const email = document.querySelector("#remail");
 const submit = document.querySelector(`#Submit`);
 
-/*
+
 var passSuccess = false;
 //this stops the submit button doing its default actions, we then run are get values method which prints out in the console the values.
 const rSubmit=(e) =>{
     e.preventDefault();
     getValues(username.value,password.value,email.value);
     if (passSuccess == true){
+    Register(e);
     alert("Welcome to Circle")
-    window.location.href ="http://127.0.0.1:5500/Login/Login.html"
+    window.location.href ="file:///C:/Users/jaker/Desktop/Wepage-Project/Login/Login.html"
     // This posts the information to my api as a json object.
-   
     }
     else{
     alert("Registration Unsuccesful")
@@ -23,10 +23,8 @@ const rSubmit=(e) =>{
 
 submit.addEventListener("click",rSubmit);
 
-
-//Test
+//Checking details have been entered correctly
 const getValues = (username,password,email ) => {
-    console.log("Json" + Registration);
     if (username == "" || password == "" || email == "") {
       alert("All fields need to be filled out");
       return false;
@@ -35,12 +33,15 @@ const getValues = (username,password,email ) => {
         return passSuccess=true;
     }
 }
-*/
 
 function Register(e){
 e.preventDefault();
 const req = new XMLHttpRequest();
-req.open("POST", "localhost:8080/customer/register");
+try{
+req.open("POST", "http://localhost:8080/customer/register");
+}
+catch(e){console.log("open failed " +e)
+}
 req.onload = () => {
   if (req.status === 201 && req.readyState == 4) {
     console.log("Server Responded with: " + req.responseText);
@@ -49,11 +50,18 @@ req.onload = () => {
   }
 };
 req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
 let data = {
-    "username" : "Jack",
-    "password" : "pill",
-    "email" : "jack.gmail.com"
+    "username" : username.value,
+    "password" : password.value,
+    "email" : email.value
    }
-req.send(JSON.stringify(data));
+   try{
+     console.log("Sending...");
+    req.send(JSON.stringify(data));
+    console.log("Sending...DONE");
 }
-submit.addEventListener("click", Register);
+catch(e){console.log("send failed " +e)
+}
+}
+//submit.addEventListener("click", Register);
