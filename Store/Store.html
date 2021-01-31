@@ -53,6 +53,7 @@
           <div class="panel-footer"><strong>Make learning fun again with circle Maths</strong></br> Test your knowledge with freinds and pracitice your skills alone. Circle maths aims to make learning fun again.</br></div>
           <div><button class="btn btn-primary"
             type="submit"
+            id= "AddOrder"
             data-item-id="Circle Maths Pack"
             data-item-price="20.00"
             data-item-url="/Circle/Maths pack"
@@ -103,10 +104,39 @@
           <div class="panel-heading"><h4>Circle Ring Pong</h4></div>
           <div class="panel-body"><img src="../Images/Ring-Pong.png" class="img-responsive" style="width:100%" alt="Circle Ping Pong"></div>
           <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+          <row>
           <div> <button type="submit" class="btn btn-primary" id= "AddOrder"> Add to basket </button></div>
+          <div> <button type="submit" class="btn btn-primary" id= "Delete"> Delete</button></div>
+          </row>
         </div>
       </div>
     </div>
+    <div class="container">
+      <h1>Update Product</h1>
+      <fieldset>
+          <form>
+              <Legend>Your details:</Legend>
+              <label for="name">name:</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter Item Name" required />
+              </br>
+              <label for="description">Description:</label>
+              <input type="text" class="form-control" id="description" placeholder="Enter Description" required />
+              </br>
+              <label for="price">Price:</label>
+              <input type="text" class="form-control" id="price" placeholder="Enter Price" required />
+              </br>
+              <label for="price">ID:</label>
+              <input type="text" class="form-control" id="id" placeholder="Enter ID" required />
+              </br>
+              <button type="submit" class="btn btn-primary" id= "Submit"> Done </button>
+              <button type="reset" class="btn btn-warning" id= "Reset"> Reset </button>
+              <a class="btn btn-light" href="../Login.html"> Back </a>
+              </br>
+          </form>
+      </fieldset>
+  </div>
+  </br>
+
   </div><br><br>
 <!-- Shopping cart -->
 <div id="cart-wrap">

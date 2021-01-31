@@ -42,10 +42,10 @@ public class CustomerService {
 	// (READ)
 	public List<CustomerDTO> readAll() {
 
-		List<Customer> catList = this.repo.findAll();
-		List<CustomerDTO> catListDTO = catList.stream().map(this::mapToDTO).collect(Collectors.toList());
+		List<Customer> customerList = this.repo.findAll();
+		List<CustomerDTO> CustomerDTO = customerList.stream().map(this::mapToDTO).collect(Collectors.toList());
 
-		return catListDTO;
+		return CustomerDTO;
 	}
 	
 	// (READ BY ID)

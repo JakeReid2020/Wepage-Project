@@ -47,7 +47,7 @@ public class CustomerController {
 	
 	// (READ BY ID)
 	@GetMapping("/read/{id}")
-	public ResponseEntity<CustomerDTO> readCat(@PathVariable("id") Long id) {
+	public ResponseEntity<CustomerDTO> readCustomer(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(this.service.readone(id));
 	}
 	

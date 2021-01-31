@@ -10,7 +10,6 @@ const rSubmit=(e) =>{
     if (passSuccess == true){
     Login(e);
     alert("Checking Details")
-    // This posts the information to my api as a json object.
     }
     else{
     alert("Login Unsuccesful")

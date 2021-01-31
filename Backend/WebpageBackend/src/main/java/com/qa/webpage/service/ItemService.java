@@ -13,6 +13,7 @@ import com.qa.webpage.persistance.dto.CustomerDTO;
 import com.qa.webpage.persistance.dto.ItemDTO;
 
 import com.qa.webpage.persistance.repo.ItemRepo;
+import com.qa.webpage.utils.MyBeanUtils;
 
 
 @Service
@@ -52,6 +53,16 @@ public class ItemService {
 	// (READ BY ID)
 	public ItemDTO readone(Long id) {
 		return this.mapToDTO(this.repo.findById(id).orElseThrow());
+	}
+	
+	// (UPDATE BY ID)
+	
+	public ItemDTO update(long id, Item item) {
+
+		Item updatedItem = this.repo.findById(id).orElseThrow();
+		MyBeanUtils.mergeNotNull(item, updatedItem);
+
+		return this.mapToDTO(this.repo.save(updatedItem));
 	}
 	
 	// (DELETE BY ID)
