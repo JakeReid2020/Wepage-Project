@@ -15,3 +15,6 @@ This page will ask for you to login if you havn't got login details you can regi
 
 About page-
 This will be a simple page where you can see how to get in contact with the company.
+
+JIRA:
+https://softwaretester12.atlassian.net/secure/RapidBoard.jspa?rapidView=4&projectKey=HWA&selectedIssue=HWA-13
