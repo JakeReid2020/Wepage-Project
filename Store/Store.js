@@ -7,6 +7,7 @@ const description = document.querySelector("#description");
 const price = document.querySelector("#price");
 const id = document.querySelector("#id");
 const submit = document.querySelector(`#Submit`);
+const StoreItems = document.querySelector('#StoreItems');
 
 
 //============================================(Counting Basket Items)
@@ -117,69 +118,30 @@ function Register(product){
     }
 
     //============================================(Update An Item)
-    var passSuccess = false;
-//this stops the submit button doing its default actions, we then run are get values method which prints out in the console the values.
-const rSubmit=(e) =>{
-    e.preventDefault();
-    getValues(itemName.value,description.value,price.value);
-    console.log(itemName.value)
-    if (passSuccess == true){
-    Register(itemName,description,price);
-    alert("Updated Product")
-    // This posts the information to my api as a json object.
-    }
-    else{
-    alert("Creation Unsuccesful")
-    }
-}
-
-
-
-//Checking details have been entered correctly
-const getValues = (description,itemName,price ) => {
-    if (description == "" || itemName == "" || price == "") {
-      alert("All fields need to be filled out");
-      return false;
-    }
-    else{
-        return passSuccess=true;
-    }
-}
-
-
-    function Register(description,itemName,price,id){ 
-    const req = new XMLHttpRequest();
+    const updateItem = (e) => {
+      e.preventDefault();
+      itemupdated = ({
+        "name": itemName.value,
+        "description": description.value,
+        "price":price.value
+      })
+      const req = new XMLHttpRequest();
     try{
-    req.open("PUT", "http://localhost:8080/item/update"+id);
+    req.open("PUT", "http://localhost:8080/item/update/"+ id.value);
     }
     catch(e){console.log("open failed " +e)
     }
-    req.onload = () => {
-      if (req.status === 201 && req.readyState == 4) {
-        console.log("Server Responded with: " + req.responseText);
-      } else {
-        console.log("Failed to conneect to server");
-      }
-    };
     req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
        try{
          console.log("Sending...");
-         console.log(itemName.value,description.value,price.value,id);
-         date =   {
-            "description" : description.value,
-            "name" : itemName.value,
-            "price" : price.value
-        }
-
-         
-        req.send(JSON.stringify(data));
+         console.log("The product clicked is", itemupdated);
+        req.send(JSON.stringify(itemupdated));
         console.log("Sending...DONE");
     }
     catch(e){console.log("send failed " +e)
     }
-    }
-
-    submit.addEventListener("click",rSubmit(description,itemName,price,id));
+  }
+  submit.addEventListener("click", updateItem);
  //============================================(SELECTING ITEM TO DELETE) 
  
 
@@ -187,16 +149,14 @@ const getValues = (description,itemName,price ) => {
     function ReadAll(){
     const req = new XMLHttpRequest();
     req.open("GET", "http://localhost:8080/item/readAll");
-    req.onload = () => {
-      if (req.status === 200 && req.readyState == 4) {
-        console.log("Server Responded with: " + req.responseText);
-        console.log(stringify(req.responseText));
-      } else {
-        console.log("Oops...");
-      }
+   req.onload = () => {
+          if (req.status === 200 && req.readyState == 4) {
+            console.log("Server Responded with: " + req.responseText);
+          } 
+        };
+        req.send();
     };
-    req.send();
-    }
+    
     cart.addEventListener("click", ReadAll);
 
 //============================================(Delete Item In Cart)
