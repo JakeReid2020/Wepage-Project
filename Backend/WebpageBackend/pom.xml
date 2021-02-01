@@ -11,9 +11,6 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-
-
-
 	<groupId>com.qa</groupId>
 	<artifactId>WebpageBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
